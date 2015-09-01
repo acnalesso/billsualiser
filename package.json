@@ -1,0 +1,34 @@
+{
+  "name": "billsualiser",
+  "version": "1.0.0",
+  "description": "Allows users to visualise their bill.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "",
+    "fn": "npm run build && cucumber.js",
+    "build": "rm -rf ./dist || true && mkdir ./dist && cp ./app/index.html ./dist/ && browserify ./app/js/index.js -o ./dist/index.js"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  },
+  "author": "acnalesso@yahoo.co.uk",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "reactify": "^1.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "cucumber": "^0.5.2",
+    "mocha": "^2.3.0",
+    "zombie": "2.5.1"
+  }
+}

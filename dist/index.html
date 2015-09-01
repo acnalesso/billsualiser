@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Billsualiser</title>
+    <style>
+      .period {
+        float: right;
+        line-height: 19px;
+      }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body class="col-xs-12">
+    <div class="col-md-8">
+      <div class="page-header">
+        <h1>My Bill</h1><br />
+
+        <ul>
+          <li><strong>Generated: </strong><small>10/20/1000</small></li>
+          <li><strong>Next Bill Date: </strong><small>10/20/1000</small></li>
+        </ul>
+        <hr />
+        <h3 align=right>Total: £120</h3>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Overview <small class="period">10/02/2015 - 16/02/2015</small></h3>
+        </div>
+
+        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Tv - Title</a>
+        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Broadband - Title</a>
+
+        <a class="list-group-item" data-toggle="collapse" data-target="#talk" href="#talk"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Talk - Title</a>
+
+          <div id="talk" class="panel-collapse collapse">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Calls</th>
+                <th>Duration</th>
+                <th>Cost</th>
+              </thead>
+
+              <tbody>
+                <th></th>
+                <th>07989887865</th>
+                <th>10 min</th>
+                <th>20.0</th>
+              </tbody>
+            </table>
+          </div>
+
+          <a class="list-group-item" data-toggle="collapse" data-target="#rentals" href="#rentals"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Rentals</a>
+          <div id="rentals" class="panel-collapse collapse">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Title</th>
+                <th>Cost</th>
+              </thead>
+
+              <tbody>
+                <th></th>
+                <th>Shades</th>
+                <th>20.0</th>
+              </tbody>
+            </table>
+          </div>
+
+          <a class="list-group-item" data-toggle="collapse" data-target="#buyAndKeep" href="#buyAndKeep"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Buy & Keep</a>
+          <div id="buyAndKeep" class="panel-collapse collapse">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Title</th>
+                <th>Cost</th>
+              </thead>
+
+              <tbody>
+                <th></th>
+                <th>Shades</th>
+                <th>20.0</th>
+              </tbody>
+            </table>
+          </div>
+
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
