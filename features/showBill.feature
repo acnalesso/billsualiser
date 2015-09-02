@@ -4,6 +4,14 @@ Feature: Show Bill
   And when my bill is due
   So that I know when to pay it and how much to pay
 
-Scenario: Showing detailed bill
+Background:
   Given I am on the view bill page
-  Then the total of my bill should be '150'
+
+Scenario: Total
+  Then I should see 'Total: £136.03' in '#total'
+
+Scenario: Generated
+  Then I should see 'Generated: 2015-01-11' in '#generated'
+
+Scenario: Due
+  Then I should see 'Due: 2015-01-25' in '#due'

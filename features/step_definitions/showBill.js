@@ -5,8 +5,8 @@ module.exports = function () {
     this.visit('/', callback);
   });
 
-  this.Then(/^the total of my bill should be '(\d+)'$/, function (total, callback) {
-    this.browser.assert.text('#total', total);
-    callback();
+  this.Then(/^I should see '(.*)' in '(.*)'$/, function (str, selector, callback) {
+    this.browser.assert.text(selector, str);
+    callback.pending();
   });
 }

@@ -12,6 +12,9 @@
   "browserify": {
     "transform": [
       [
+        "babelify"
+      ],
+      [
         "reactify",
         {
           "es6": true
@@ -22,6 +25,7 @@
   "author": "acnalesso@yahoo.co.uk",
   "license": "MIT",
   "dependencies": {
+    "babelify": "^6.3.0",
     "express": "^4.13.3",
     "reactify": "^1.1.1"
   },
