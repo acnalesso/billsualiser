@@ -16,7 +16,7 @@ export default class BillInfo extends React.Component {
         <h3 id="total">Total: £{this.props.data.total}</h3>
       </div>
 
-      <Overview package={this.props.data.package} period={this.props.data.statement.period} />
+      <Overview package={this.props.data.package} period={this.props.data.statement.period} callCharges={this.props.data.callCharges} skyStore={this.props.data.skyStore} />
     </div>
   };
 

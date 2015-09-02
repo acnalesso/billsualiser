@@ -2,17 +2,63 @@ import React from "react";
 
 export default class Overview extends React.Component {
 
+  getTvTitle() {
+    return this.props.package.subscriptions.map(function (subscription) {
+      if (subscription.type === "tv")
+        return subscription.name;
+    });
+  };
+
+  getBroadbandTitle() {
+    return this.props.package.subscriptions.map(function (subscription) {
+      if (subscription.type === "broadband")
+        return subscription.name;
+    });
+  };
+
+  getTalkTitle() {
+    return this.props.package.subscriptions.map(function (subscription) {
+      if (subscription.type === "talk")
+        return subscription.name;
+    });
+  };
+
+  getTotalCostFor (type) {
+    return this.props.package.subscriptions.map(function (subscription) {
+      if (subscription.type === type)
+        return parseFloat(Math.round(subscription.cost * 100) / 100).toFixed(2)
+    });
+  };
+
+  addUpTotalCostsFor (property) {
+    let total = 0;
+    let items = this.props.skyStore[property];
+
+    items.map(function (item) {
+      total += item.cost;
+    });
+    return total;
+  }
+
   render () {
     return <div className="panel panel-primary">
       <div className="panel-heading">
-        <h3 className="panel-title">Overview <small className="period">{this.props.period.from} - {this.props.period.to}</small></h3>
+        <h3 className="panel-title">Overview <small id="period">{this.props.period.from} - {this.props.period.to}</small></h3>
       </div>
 
-      <a href="#" className="list-group-item"><span className="glyphicon glyphicon-chevron-right"></span> Tv - Title</a>
-      <a href="#" className="list-group-item"><span className="glyphicon glyphicon-chevron-right"></span> Broadband - Title</a>
+      <a id="tv_title" className="list-group-item" data-toggle="collapse" data-target="#tv" href="#tv"><span className="glyphicon glyphicon-chevron-right"></span> TV - {this.getTvTitle()} <span className="badge">£ {this.getTotalCostFor('tv')}</span></a>
+        <div id="tv" className="panel-collapse collapse">
+          <a href="#more-tv-channels">Want to add more TV Channels?</a><br />
+          <a href="#help">Help</a>
+        </div>
 
-      <a className="list-group-item" data-toggle="collapse" data-target="#talk" href="#talk"><span className="glyphicon glyphicon-chevron-right"></span> Talk - Title<span className="badge">14</span></a>
+      <a id="broadband_title" className="list-group-item" data-toggle="collapse" data-target="#broadband" href="#broadband"><span className="glyphicon glyphicon-chevron-right"></span> Broadband - {this.getBroadbandTitle()} <span className="badge">£ {this.getTotalCostFor('broadband')}</span></a>
+        <div id="broadband" className="panel-collapse collapse">
+          <a href="#change-bb-plan">Change broadband speed</a><br />
+          <a href="#help">Help</a>
+        </div>
 
+      <a id="talk_title" className="list-group-item" data-toggle="collapse" data-target="#talk" href="#talk"><span className="glyphicon glyphicon-chevron-right"></span> Talk - {this.getTalkTitle()} <span className="badge">£ {this.getTotalCostFor('talk')} + {this.props.callCharges.total}</span></a>
         <div id="talk" className="panel-collapse collapse">
           <table className="table">
             <thead>
@@ -31,7 +77,7 @@ export default class Overview extends React.Component {
           </table>
         </div>
 
-        <a className="list-group-item" data-toggle="collapse" data-target="#rentals" href="#rentals"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Rentals</a>
+        <a id="rentals_title" className="list-group-item" data-toggle="collapse" data-target="#rentals" href="#rentals"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Rentals <span className="badge">£ {this.addUpTotalCostsFor('rentals')}</span></a>
         <div id="rentals" className="panel-collapse collapse">
           <table className="table">
             <thead>
@@ -48,7 +94,7 @@ export default class Overview extends React.Component {
           </table>
         </div>
 
-        <a className="list-group-item" data-toggle="collapse" data-target="#buyAndKeep" href="#buyAndKeep"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Buy & Keep</a>
+        <a id="buy_and_keep_title" className="list-group-item" data-toggle="collapse" data-target="#buyAndKeep" href="#buyAndKeep"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Buy & Keep <span className="badge">£ {this.addUpTotalCostsFor('buyAndKeep')}</span></a>
         <div id="buyAndKeep" className="panel-collapse collapse">
           <table className="table">
             <thead>

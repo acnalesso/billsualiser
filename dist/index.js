@@ -87,7 +87,7 @@ var BillInfo = (function (_React$Component) {
             this.props.data.total
           )
         ),
-        _react2["default"].createElement(_OverviewJsx2["default"], { "package": this.props.data["package"], period: this.props.data.statement.period })
+        _react2["default"].createElement(_OverviewJsx2["default"], { "package": this.props.data["package"], period: this.props.data.statement.period, callCharges: this.props.data.callCharges, skyStore: this.props.data.skyStore })
       );
     }
   }]);
@@ -131,6 +131,45 @@ var Overview = (function (_React$Component) {
   }
 
   _createClass(Overview, [{
+    key: "getTvTitle",
+    value: function getTvTitle() {
+      return this.props["package"].subscriptions.map(function (subscription) {
+        if (subscription.type === "tv") return subscription.name;
+      });
+    }
+  }, {
+    key: "getBroadbandTitle",
+    value: function getBroadbandTitle() {
+      return this.props["package"].subscriptions.map(function (subscription) {
+        if (subscription.type === "broadband") return subscription.name;
+      });
+    }
+  }, {
+    key: "getTalkTitle",
+    value: function getTalkTitle() {
+      return this.props["package"].subscriptions.map(function (subscription) {
+        if (subscription.type === "talk") return subscription.name;
+      });
+    }
+  }, {
+    key: "getTotalCostFor",
+    value: function getTotalCostFor(type) {
+      return this.props["package"].subscriptions.map(function (subscription) {
+        if (subscription.type === type) return parseFloat(Math.round(subscription.cost * 100) / 100).toFixed(2);
+      });
+    }
+  }, {
+    key: "addUpTotalCostsFor",
+    value: function addUpTotalCostsFor(property) {
+      var total = 0;
+      var items = this.props.skyStore[property];
+
+      items.map(function (item) {
+        total += item.cost;
+      });
+      return total;
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2["default"].createElement(
@@ -145,7 +184,7 @@ var Overview = (function (_React$Component) {
             "Overview ",
             _react2["default"].createElement(
               "small",
-              { className: "period" },
+              { id: "period" },
               this.props.period.from,
               " - ",
               this.props.period.to
@@ -154,25 +193,76 @@ var Overview = (function (_React$Component) {
         ),
         _react2["default"].createElement(
           "a",
-          { href: "#", className: "list-group-item" },
+          { id: "tv_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#tv", href: "#tv" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " Tv - Title"
-        ),
-        _react2["default"].createElement(
-          "a",
-          { href: "#", className: "list-group-item" },
-          _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " Broadband - Title"
-        ),
-        _react2["default"].createElement(
-          "a",
-          { className: "list-group-item", "data-toggle": "collapse", "data-target": "#talk", href: "#talk" },
-          _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " Talk - Title",
+          " TV - ",
+          this.getTvTitle(),
+          " ",
           _react2["default"].createElement(
             "span",
             { className: "badge" },
-            "14"
+            "£ ",
+            this.getTotalCostFor('tv')
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { id: "tv", className: "panel-collapse collapse" },
+          _react2["default"].createElement(
+            "a",
+            { href: "#more-tv-channels" },
+            "Want to add more TV Channels?"
+          ),
+          _react2["default"].createElement("br", null),
+          _react2["default"].createElement(
+            "a",
+            { href: "#help" },
+            "Help"
+          )
+        ),
+        _react2["default"].createElement(
+          "a",
+          { id: "broadband_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#broadband", href: "#broadband" },
+          _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
+          " Broadband - ",
+          this.getBroadbandTitle(),
+          " ",
+          _react2["default"].createElement(
+            "span",
+            { className: "badge" },
+            "£ ",
+            this.getTotalCostFor('broadband')
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { id: "broadband", className: "panel-collapse collapse" },
+          _react2["default"].createElement(
+            "a",
+            { href: "#change-bb-plan" },
+            "Change broadband speed"
+          ),
+          _react2["default"].createElement("br", null),
+          _react2["default"].createElement(
+            "a",
+            { href: "#help" },
+            "Help"
+          )
+        ),
+        _react2["default"].createElement(
+          "a",
+          { id: "talk_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#talk", href: "#talk" },
+          _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
+          " Talk - ",
+          this.getTalkTitle(),
+          " ",
+          _react2["default"].createElement(
+            "span",
+            { className: "badge" },
+            "£ ",
+            this.getTotalCostFor('talk'),
+            " + ",
+            this.props.callCharges.total
           )
         ),
         _react2["default"].createElement(
@@ -225,9 +315,15 @@ var Overview = (function (_React$Component) {
         ),
         _react2["default"].createElement(
           "a",
-          { className: "list-group-item", "data-toggle": "collapse", "data-target": "#rentals", href: "#rentals" },
+          { id: "rentals_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#rentals", href: "#rentals" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right", "aria-hidden": "true" }),
-          " Rentals"
+          " Rentals ",
+          _react2["default"].createElement(
+            "span",
+            { className: "badge" },
+            "£ ",
+            this.addUpTotalCostsFor('rentals')
+          )
         ),
         _react2["default"].createElement(
           "div",
@@ -269,9 +365,15 @@ var Overview = (function (_React$Component) {
         ),
         _react2["default"].createElement(
           "a",
-          { className: "list-group-item", "data-toggle": "collapse", "data-target": "#buyAndKeep", href: "#buyAndKeep" },
+          { id: "buy_and_keep_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#buyAndKeep", href: "#buyAndKeep" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right", "aria-hidden": "true" }),
-          " Buy & Keep"
+          " Buy & Keep ",
+          _react2["default"].createElement(
+            "span",
+            { className: "badge" },
+            "£ ",
+            this.addUpTotalCostsFor('buyAndKeep')
+          )
         ),
         _react2["default"].createElement(
           "div",
