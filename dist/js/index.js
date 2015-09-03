@@ -40,13 +40,12 @@ var BillInfo = (function (_React$Component) {
         { className: "col-md-8" },
         _react2["default"].createElement(
           "div",
-          { className: "page-header" },
+          { id: "bill_info_dates" },
           _react2["default"].createElement(
             "h1",
             null,
             "My Bill"
           ),
-          _react2["default"].createElement("br", null),
           _react2["default"].createElement(
             "ul",
             null,
@@ -63,31 +62,27 @@ var BillInfo = (function (_React$Component) {
                 null,
                 this.props.data.statement.generated
               )
-            ),
-            _react2["default"].createElement(
-              "li",
-              { id: "due" },
-              _react2["default"].createElement(
-                "strong",
-                null,
-                "Due: "
-              ),
-              _react2["default"].createElement(
-                "small",
-                null,
-                this.props.data.statement.due
-              )
             )
           ),
           _react2["default"].createElement("hr", null),
           _react2["default"].createElement(
-            "h3",
-            { id: "total" },
-            "Total: £",
-            this.props.data.total
+            "div",
+            { id: "bill_info" },
+            _react2["default"].createElement(
+              "div",
+              { id: "due" },
+              "Payment due on ",
+              this.props.data.statement.due
+            ),
+            _react2["default"].createElement(
+              "h4",
+              { id: "total" },
+              "Total: £",
+              this.props.data.total
+            )
           )
         ),
-        _react2["default"].createElement(_OverviewJsx2["default"], { "package": this.props.data["package"], period: this.props.data.statement.period, callCharges: this.props.data.callCharges, skyStore: this.props.data.skyStore })
+        _react2["default"].createElement(_OverviewJsx2["default"], { data: this.props.data })
       );
     }
   }]);
@@ -131,38 +126,51 @@ var Overview = (function (_React$Component) {
   }
 
   _createClass(Overview, [{
+    key: "formatFloat",
+    value: function formatFloat(n) {
+      return parseFloat(Math.round(n * 100) / 100).toFixed(2);
+    }
+  }, {
     key: "getTvTitle",
     value: function getTvTitle() {
-      return this.props["package"].subscriptions.map(function (subscription) {
+      return this.props.data["package"].subscriptions.map(function (subscription) {
         if (subscription.type === "tv") return subscription.name;
       });
     }
   }, {
     key: "getBroadbandTitle",
     value: function getBroadbandTitle() {
-      return this.props["package"].subscriptions.map(function (subscription) {
+      return this.props.data["package"].subscriptions.map(function (subscription) {
         if (subscription.type === "broadband") return subscription.name;
       });
     }
   }, {
     key: "getTalkTitle",
     value: function getTalkTitle() {
-      return this.props["package"].subscriptions.map(function (subscription) {
+      return this.props.data["package"].subscriptions.map(function (subscription) {
         if (subscription.type === "talk") return subscription.name;
       });
     }
   }, {
     key: "getTotalCostFor",
     value: function getTotalCostFor(type) {
-      return this.props["package"].subscriptions.map(function (subscription) {
-        if (subscription.type === type) return parseFloat(Math.round(subscription.cost * 100) / 100).toFixed(2);
+      var cost = 0;
+      this.props.data["package"].subscriptions.map(function (subscription) {
+        if (subscription.type === type) cost = subscription.cost;
       });
+      return this.formatFloat(cost);
+    }
+  }, {
+    key: "getTalkTotalCost",
+    value: function getTalkTotalCost() {
+      var talkCost = parseFloat(this.getTotalCostFor('talk'));
+      return this.formatFloat(talkCost + this.props.data.callCharges.total);
     }
   }, {
     key: "addUpTotalCostsFor",
     value: function addUpTotalCostsFor(property) {
       var total = 0;
-      var items = this.props.skyStore[property];
+      var items = this.props.data.skyStore[property];
 
       items.map(function (item) {
         total += item.cost;
@@ -174,20 +182,20 @@ var Overview = (function (_React$Component) {
     value: function render() {
       return _react2["default"].createElement(
         "div",
-        { className: "panel panel-primary" },
+        { className: "panel panel-info" },
         _react2["default"].createElement(
           "div",
           { className: "panel-heading" },
           _react2["default"].createElement(
             "h3",
             { className: "panel-title" },
-            "Overview ",
+            "Packages & Charges ",
             _react2["default"].createElement(
               "small",
               { id: "period" },
-              this.props.period.from,
+              this.props.data.statement.period.from,
               " - ",
-              this.props.period.to
+              this.props.data.statement.period.to
             )
           )
         ),
@@ -195,7 +203,7 @@ var Overview = (function (_React$Component) {
           "a",
           { id: "tv_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#tv", href: "#tv" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " TV - ",
+          " Sky TV ",
           this.getTvTitle(),
           " ",
           _react2["default"].createElement(
@@ -224,7 +232,7 @@ var Overview = (function (_React$Component) {
           "a",
           { id: "broadband_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#broadband", href: "#broadband" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " Broadband - ",
+          " Sky Broadband ",
           this.getBroadbandTitle(),
           " ",
           _react2["default"].createElement(
@@ -253,16 +261,14 @@ var Overview = (function (_React$Component) {
           "a",
           { id: "talk_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#talk", href: "#talk" },
           _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
-          " Talk - ",
+          " ",
           this.getTalkTitle(),
           " ",
           _react2["default"].createElement(
             "span",
             { className: "badge" },
             "£ ",
-            this.getTotalCostFor('talk'),
-            " + ",
-            this.props.callCharges.total
+            this.getTalkTotalCost()
           )
         ),
         _react2["default"].createElement(
@@ -438,165 +444,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var data = {
-  statement: {
-    generated: "2015-01-11",
-    due: "2015-01-25",
-    period: {
-      from: "2015-01-26",
-      to: "2015-02-25"
-    }
-  },
-  total: 136.03,
-  "package": {
-    subscriptions: [{
-      type: "tv",
-      name: "Variety with Movies HD",
-      cost: 50
-    }, {
-      type: "talk",
-      name: "Sky Talk Anytime",
-      cost: 5
-    }, {
-      type: "broadband",
-      name: "Fibre Unlimited",
-      cost: 16.4
-    }],
-    total: 71.4
-  },
-  callCharges: {
-    calls: [{
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "07716393769",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }, {
-      called: "02074351359",
-      duration: "00:23:03",
-      cost: 2.13
-    }],
-    total: 59.64
-  },
-  skyStore: {
-    rentals: [{
-      title: "50 Shades of Grey",
-      cost: 4.99
-    }],
-    buyAndKeep: [{
-      title: "That's what she said",
-      cost: 9.99
-    }, {
-      title: "Broke back mountain",
-      cost: 9.99
-    }],
-    total: 24.97
-  }
-};
-
-_react2["default"].render(_react2["default"].createElement(_componentsBillInfoJsx2["default"], { data: data }), document.getElementById('content'));
+$.get('http://localhost:3000/payload', function (payload) {
+  payload = JSON.parse(payload);
+  _react2["default"].render(_react2["default"].createElement(_componentsBillInfoJsx2["default"], { data: payload }), document.getElementById('content'));
+});
 
 
 },{"./components/BillInfo.jsx":1,"react":158}],4:[function(require,module,exports){

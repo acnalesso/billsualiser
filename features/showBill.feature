@@ -14,4 +14,4 @@ Scenario: Generated
   Then I should see 'Generated: 2015-01-11' in '#generated'
 
 Scenario: Due
-  Then I should see 'Due: 2015-01-25' in '#due'
+  Then I should see 'Payment due on 2015-01-25' in '#due'

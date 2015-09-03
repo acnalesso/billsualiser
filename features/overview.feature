@@ -10,13 +10,13 @@ Scenario: Period
   Then I should see '2015-01-26 - 2015-02-25' in '#period'
 
 Scenario: TV package
-  Then I should see 'TV - Variety with Movies HD £ 50.00' in '#tv_title'
+  Then I should see 'Sky TV Variety with Movies HD £ 50.00' in '#tv_title'
 
 Scenario: Broadband package
-  Then I should see 'Broadband - Fibre Unlimited £ 16.40' in '#broadband_title'
+  Then I should see 'Sky Broadband Fibre Unlimited £ 16.40' in '#broadband_title'
 
 Scenario: Talk package + total cost of charges
-  Then I should see 'Talk - Sky Talk Anytime £ 5.00 + 59.64' in '#talk_title'
+  Then I should see 'Sky Talk Anytime £ 64.64' in '#talk_title'
 
 Scenario: Rentals
   Then I should see 'Rentals £ 4.99' in '#rentals_title'

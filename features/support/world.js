@@ -1,13 +1,28 @@
-var Browser = require('zombie');
+var webdriver = require('selenium-webdriver')
+var chaiAsPromised = require('chai-as-promised');
+var chai = require('chai');
+
+chai.use(chaiAsPromised);
+chai.should();
+//chaiAsPromised.transferPromiseness = wd.transferPromiseness;
+//
+var browser = new webdriver.Builder().
+  forBrowser('firefox').
+  build();
+
 
 module.exports.World = function(callback) {
-  this.browser = new Browser({
-    site: 'http://localhost.bskyb.com:3000'
-  });
 
-  this.visit = function (url, callback) {
-    this.browser.visit(url, callback);
+  this.browser = browser;
+
+  this.visit = function (url) {
+    var defaultUrl = "http://localhost:3000";
+    return this.browser.get(defaultUrl + url);
   };
+
+  this.expect = chai.expect
+
+  this.By = webdriver.By;
 
   callback();
 }

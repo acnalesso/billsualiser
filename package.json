@@ -7,7 +7,7 @@
   "scripts": {
     "test": "",
     "fn": "npm run build && cucumber.js",
-    "build": "rm -rf ./dist || true && mkdir ./dist && cp ./app/index.html ./dist/ && browserify ./app/js/index.js -o ./dist/index.js"
+    "build": "rm -rf ./dist || true && mkdir -p ./dist/css && mkdir ./dist/js && cp ./app/index.html ./dist && cp -R ./app/css/ ./dist/css && cp -R ./app/js/vendor/ ./dist/js && browserify ./app/js/index.js -o ./dist/js/index.js"
   },
   "browserify": {
     "transform": [
@@ -26,6 +26,8 @@
   "license": "MIT",
   "dependencies": {
     "babelify": "^6.3.0",
+    "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
     "express": "^4.13.3",
     "reactify": "^1.1.1"
   },
@@ -33,6 +35,8 @@
     "chai": "^3.2.0",
     "cucumber": "^0.5.2",
     "mocha": "^2.3.0",
+    "wd": "^0.3.12",
+    "webdriver-manager": "^7.0.1",
     "zombie": "2.5.1"
   }
 }

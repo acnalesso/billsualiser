@@ -1,22 +1,16 @@
 <html>
   <head>
     <title>Billsualiser</title>
-    <style>
-      #total {
-        text-align: right;
-      }
-      #period {
-        float: right;
-        line-height: 19px;
-      }
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
   </head>
   <body class="col-xs-12">
-    <div id=content></div>
+    <div id=content>
+      <i class='icon-spinner icon-spin icon-large'>Loading</i>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="./index.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
 </html>
