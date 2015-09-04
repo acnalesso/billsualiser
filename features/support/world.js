@@ -20,6 +20,10 @@ module.exports.World = function(callback) {
     return this.browser.get(defaultUrl + url);
   };
 
+  this.clickOn = function (selector) {
+    return this.browser.findElement(this.By.css(selector)).click();
+  };
+
   this.expect = chai.expect
 
   this.By = webdriver.By;
