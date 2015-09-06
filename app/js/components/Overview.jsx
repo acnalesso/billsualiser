@@ -1,4 +1,6 @@
 import React from "react";
+import DisplayCallCharges from "./DisplayCallCharges.jsx";
+import Anchor from "./Anchor.jsx"
 
 export default class Overview extends React.Component {
 
@@ -69,24 +71,9 @@ export default class Overview extends React.Component {
           <a href="#help">Help</a>
         </div>
 
-      <a id="talk_title" className="list-group-item" data-toggle="collapse" data-target="#talk" href="#talk"><span className="glyphicon glyphicon-chevron-right"></span> {this.getTalkTitle()} <span className="badge">£ {this.getTalkTotalCost()}</span></a>
-        <div id="talk" className="panel-collapse collapse">
-          <table className="table">
-            <thead>
-              <th></th>
-              <th>Calls</th>
-              <th>Duration</th>
-              <th>Cost</th>
-            </thead>
 
-            <tbody>
-              <th></th>
-              <th>07989887865</th>
-              <th>10 min</th>
-              <th>20.0</th>
-            </tbody>
-          </table>
-        </div>
+        <Anchor id="talk_title"  target="talk" title={this.getTalkTitle()} totalCost={this.getTalkTotalCost()} />
+        <DisplayCallCharges id="talk" callCharges={this.props.data.callCharges.calls} />
 
         <a id="rentals_title" className="list-group-item" data-toggle="collapse" data-target="#rentals" href="#rentals"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Rentals <span className="badge">£ {this.addUpTotalCostsFor('rentals')}</span></a>
         <div id="rentals" className="panel-collapse collapse">

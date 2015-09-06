@@ -3,7 +3,16 @@ module.exports = function () {
   this.World = require('../support/world').World;
 
   this.Given(/^I am on the view bill page$/, function (done) {
-    this.visit('/').then(done)
+    this.visit('/').then(function () {
+
+      this.browser.wait(function() {
+        this.browser.executeScript("return document.getElementById('bill_info_dates');").then(function (element) {
+          if (element !== null)
+            done();
+        });
+      }.bind(this), 5000);
+
+    }.bind(this))
   });
 
   this.Then(/^I should see '(.*)' in '(.*)'$/, function (str, selector, done) {

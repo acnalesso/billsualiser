@@ -6,9 +6,11 @@ Feature: Call charges
 Background:
   Given I am on the view bill page
 
-
 Scenario: Viewing call charges
   When I click on '#talk_title'
   Then I should see the following call charges in '#talk table':
     | Calls       | Duration  | Cost |
-    | 07989887865 | 10 min    | 20.0 |
+    | 07716393769 | 00:23:03  | 2.13 |
+    | 07716393769 | 00:23:03  | 2.13 |
+    | 07716393769 | 00:23:03  | 2.13 |
+    | 07716393769 | 00:23:03  | 2.13 |

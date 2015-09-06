@@ -1,0 +1,8 @@
+Writing PID to /Users/acnalesso/dev/opensource/billsualiser/test/tmp/pids/optimus_prime.pid
+/Users/acnalesso/.rvm/gems/ruby-2.1.3/gems/thin-1.6.3/lib/thin/backends/base.rb:103: warning: epoll is not supported on this platform
+Using rack adapter
+Running config.ru now
+Thin web server (v1.6.3 codename Protein Powder)
+Debugging ON
+Maximum connections set to 1024
+Listening on 0.0.0.0:7011, CTRL+C to stop
