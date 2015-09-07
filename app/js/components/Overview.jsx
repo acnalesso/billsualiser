@@ -1,5 +1,6 @@
 import React from "react";
 import DisplayCallCharges from "./DisplayCallCharges.jsx";
+import DisplayRentals from "./DisplayRentals.jsx";
 import Anchor from "./Anchor.jsx"
 
 export default class Overview extends React.Component {
@@ -75,22 +76,8 @@ export default class Overview extends React.Component {
         <Anchor id="talk_title"  target="talk" title={this.getTalkTitle()} totalCost={this.getTalkTotalCost()} />
         <DisplayCallCharges id="talk" callCharges={this.props.data.callCharges.calls} />
 
-        <a id="rentals_title" className="list-group-item" data-toggle="collapse" data-target="#rentals" href="#rentals"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Rentals <span className="badge">£ {this.addUpTotalCostsFor('rentals')}</span></a>
-        <div id="rentals" className="panel-collapse collapse">
-          <table className="table">
-            <thead>
-              <th></th>
-              <th>Title</th>
-              <th>Cost</th>
-            </thead>
-
-            <tbody>
-              <th></th>
-              <th>Shades</th>
-              <th>20.0</th>
-            </tbody>
-          </table>
-        </div>
+        <Anchor id="rentals_title"  target="rentals" title="Rentals" totalCost={this.addUpTotalCostsFor('rentals')} />
+        <DisplayRentals rentals={this.props.data.skyStore.rentals} />
 
         <a id="buy_and_keep_title" className="list-group-item" data-toggle="collapse" data-target="#buyAndKeep" href="#buyAndKeep"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Buy & Keep <span className="badge">£ {this.addUpTotalCostsFor('buyAndKeep')}</span></a>
         <div id="buyAndKeep" className="panel-collapse collapse">
