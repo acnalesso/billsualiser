@@ -259,21 +259,21 @@ var _RowJsx = require("./Row.jsx");
 
 var _RowJsx2 = _interopRequireDefault(_RowJsx);
 
-var DisplayRentals = (function (_React$Component) {
-  _inherits(DisplayRentals, _React$Component);
+var DisplaySimpleTable = (function (_React$Component) {
+  _inherits(DisplaySimpleTable, _React$Component);
 
-  function DisplayRentals() {
-    _classCallCheck(this, DisplayRentals);
+  function DisplaySimpleTable() {
+    _classCallCheck(this, DisplaySimpleTable);
 
-    _get(Object.getPrototypeOf(DisplayRentals.prototype), "constructor", this).apply(this, arguments);
+    _get(Object.getPrototypeOf(DisplaySimpleTable.prototype), "constructor", this).apply(this, arguments);
   }
 
-  _createClass(DisplayRentals, [{
+  _createClass(DisplaySimpleTable, [{
     key: "render",
     value: function render() {
       return _react2["default"].createElement(
         "div",
-        { id: "rentals", className: "panel-collapse collapse" },
+        { id: this.props.id, className: "panel-collapse collapse" },
         _react2["default"].createElement(
           "table",
           { className: "table table-striped" },
@@ -295,8 +295,8 @@ var DisplayRentals = (function (_React$Component) {
           _react2["default"].createElement(
             "tbody",
             null,
-            this.props.rentals.map(function (rental) {
-              return _react2["default"].createElement(_RowJsx2["default"], { key: Math.random(), contents: [rental.title, rental.cost] });
+            this.props.rows.map(function (content) {
+              return _react2["default"].createElement(_RowJsx2["default"], { key: Math.random(), contents: [content.title, content.cost] });
             })
           )
         )
@@ -304,10 +304,10 @@ var DisplayRentals = (function (_React$Component) {
     }
   }]);
 
-  return DisplayRentals;
+  return DisplaySimpleTable;
 })(_react2["default"].Component);
 
-exports["default"] = DisplayRentals;
+exports["default"] = DisplaySimpleTable;
 ;
 module.exports = exports["default"];
 
@@ -337,9 +337,9 @@ var _DisplayCallChargesJsx = require("./DisplayCallCharges.jsx");
 
 var _DisplayCallChargesJsx2 = _interopRequireDefault(_DisplayCallChargesJsx);
 
-var _DisplayRentalsJsx = require("./DisplayRentals.jsx");
+var _DisplaySimpleTableJsx = require("./DisplaySimpleTable.jsx");
 
-var _DisplayRentalsJsx2 = _interopRequireDefault(_DisplayRentalsJsx);
+var _DisplaySimpleTableJsx2 = _interopRequireDefault(_DisplaySimpleTableJsx);
 
 var _AnchorJsx = require("./Anchor.jsx");
 
@@ -489,57 +489,9 @@ var Overview = (function (_React$Component) {
         _react2["default"].createElement(_AnchorJsx2["default"], { id: "talk_title", target: "talk", title: this.getTalkTitle(), totalCost: this.getTalkTotalCost() }),
         _react2["default"].createElement(_DisplayCallChargesJsx2["default"], { id: "talk", callCharges: this.props.data.callCharges.calls }),
         _react2["default"].createElement(_AnchorJsx2["default"], { id: "rentals_title", target: "rentals", title: "Rentals", totalCost: this.addUpTotalCostsFor('rentals') }),
-        _react2["default"].createElement(_DisplayRentalsJsx2["default"], { rentals: this.props.data.skyStore.rentals }),
-        _react2["default"].createElement(
-          "a",
-          { id: "buy_and_keep_title", className: "list-group-item", "data-toggle": "collapse", "data-target": "#buyAndKeep", href: "#buyAndKeep" },
-          _react2["default"].createElement("span", { className: "glyphicon glyphicon-chevron-right", "aria-hidden": "true" }),
-          " Buy & Keep ",
-          _react2["default"].createElement(
-            "span",
-            { className: "badge" },
-            "£ ",
-            this.addUpTotalCostsFor('buyAndKeep')
-          )
-        ),
-        _react2["default"].createElement(
-          "div",
-          { id: "buyAndKeep", className: "panel-collapse collapse" },
-          _react2["default"].createElement(
-            "table",
-            { className: "table" },
-            _react2["default"].createElement(
-              "thead",
-              null,
-              _react2["default"].createElement("th", null),
-              _react2["default"].createElement(
-                "th",
-                null,
-                "Title"
-              ),
-              _react2["default"].createElement(
-                "th",
-                null,
-                "Cost"
-              )
-            ),
-            _react2["default"].createElement(
-              "tbody",
-              null,
-              _react2["default"].createElement("th", null),
-              _react2["default"].createElement(
-                "th",
-                null,
-                "Shades"
-              ),
-              _react2["default"].createElement(
-                "th",
-                null,
-                "20.0"
-              )
-            )
-          )
-        )
+        _react2["default"].createElement(_DisplaySimpleTableJsx2["default"], { id: "rentals", rows: this.props.data.skyStore.rentals }),
+        _react2["default"].createElement(_AnchorJsx2["default"], { id: "buy_and_keep_title", target: "buy_and_keep", title: "Buy & Keep", totalCost: this.addUpTotalCostsFor('buyAndKeep') }),
+        _react2["default"].createElement(_DisplaySimpleTableJsx2["default"], { id: "buy_and_keep", rows: this.props.data.skyStore.buyAndKeep })
       );
     }
   }]);
@@ -552,7 +504,7 @@ exports["default"] = Overview;
 module.exports = exports["default"];
 
 
-},{"./Anchor.jsx":1,"./DisplayCallCharges.jsx":3,"./DisplayRentals.jsx":4,"react":163}],6:[function(require,module,exports){
+},{"./Anchor.jsx":1,"./DisplayCallCharges.jsx":3,"./DisplaySimpleTable.jsx":4,"react":163}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

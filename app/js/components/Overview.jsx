@@ -1,6 +1,6 @@
 import React from "react";
 import DisplayCallCharges from "./DisplayCallCharges.jsx";
-import DisplayRentals from "./DisplayRentals.jsx";
+import DisplaySimpleTable from "./DisplaySimpleTable.jsx";
 import Anchor from "./Anchor.jsx"
 
 export default class Overview extends React.Component {
@@ -61,40 +61,25 @@ export default class Overview extends React.Component {
       </div>
 
       <a id="tv_title" className="list-group-item" data-toggle="collapse" data-target="#tv" href="#tv"><span className="glyphicon glyphicon-chevron-right"></span> Sky TV {this.getTvTitle()} <span className="badge">£ {this.getTotalCostFor('tv')}</span></a>
-        <div id="tv" className="panel-collapse collapse">
-          <a href="#more-tv-channels">Want to add more TV Channels?</a><br />
-          <a href="#help">Help</a>
-        </div>
+      <div id="tv" className="panel-collapse collapse">
+        <a href="#more-tv-channels">Want to add more TV Channels?</a><br />
+        <a href="#help">Help</a>
+      </div>
 
       <a id="broadband_title" className="list-group-item" data-toggle="collapse" data-target="#broadband" href="#broadband"><span className="glyphicon glyphicon-chevron-right"></span> Sky Broadband {this.getBroadbandTitle()} <span className="badge">£ {this.getTotalCostFor('broadband')}</span></a>
-        <div id="broadband" className="panel-collapse collapse">
-          <a href="#change-bb-plan">Change broadband speed</a><br />
-          <a href="#help">Help</a>
-        </div>
-
-
-        <Anchor id="talk_title"  target="talk" title={this.getTalkTitle()} totalCost={this.getTalkTotalCost()} />
-        <DisplayCallCharges id="talk" callCharges={this.props.data.callCharges.calls} />
-
-        <Anchor id="rentals_title"  target="rentals" title="Rentals" totalCost={this.addUpTotalCostsFor('rentals')} />
-        <DisplayRentals rentals={this.props.data.skyStore.rentals} />
-
-        <a id="buy_and_keep_title" className="list-group-item" data-toggle="collapse" data-target="#buyAndKeep" href="#buyAndKeep"><span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Buy & Keep <span className="badge">£ {this.addUpTotalCostsFor('buyAndKeep')}</span></a>
-        <div id="buyAndKeep" className="panel-collapse collapse">
-          <table className="table">
-            <thead>
-              <th></th>
-              <th>Title</th>
-              <th>Cost</th>
-            </thead>
-
-            <tbody>
-              <th></th>
-              <th>Shades</th>
-              <th>20.0</th>
-            </tbody>
-          </table>
+      <div id="broadband" className="panel-collapse collapse">
+        <a href="#change-bb-plan">Change broadband speed</a><br />
+        <a href="#help">Help</a>
       </div>
+
+      <Anchor id="talk_title"  target="talk" title={this.getTalkTitle()} totalCost={this.getTalkTotalCost()} />
+      <DisplayCallCharges id="talk" callCharges={this.props.data.callCharges.calls} />
+
+      <Anchor id="rentals_title"  target="rentals" title="Rentals" totalCost={this.addUpTotalCostsFor('rentals')} />
+      <DisplaySimpleTable id="rentals" rows={this.props.data.skyStore.rentals} />
+
+      <Anchor id="buy_and_keep_title"  target="buy_and_keep" title="Buy & Keep" totalCost={this.addUpTotalCostsFor('buyAndKeep')} />
+      <DisplaySimpleTable id="buy_and_keep" rows={this.props.data.skyStore.buyAndKeep} />
     </div>;
   };
 };

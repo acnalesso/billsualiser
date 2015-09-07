@@ -1,6 +1,6 @@
 import React from "react";
 import chai from "chai";
-import DisplayRentals from "./../../app/js/components/DisplayRentals.jsx";
+import DisplaySimpleTable from "./../../app/js/components/DisplaySimpleTable.jsx";
 
 const expect = chai.expect;
 let component;
@@ -18,11 +18,11 @@ const rentals = [
 
 describe('DisplayRentals', function () {
   before(function () {
-    renderComponent(<DisplayRentals rentals={rentals} />);
+    renderComponent(<DisplaySimpleTable id="id-here" rows={rentals} />);
   });
 
   it('has an id', function () {
-    expect(component.props.id).to.equal('rentals');
+    expect(component.props.id).to.equal('id-here');
   });
 
   it('displays given rows', function () {
