@@ -4,6 +4,8 @@ Billsualizer
 
 Allows people to see their bill ;)
 
+## How can I see my bill?
+  By going to the <strong></strong> and clicking on a section of interest.
 
 ## How to build the app
 ```bash
