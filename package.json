@@ -7,7 +7,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers js:babel/register test/**/*.test.js",
     "fn": "npm run build && cucumber.js",
-    "build": "rm -rf ./dist || true && mkdir -p ./dist/css && mkdir ./dist/js && cp ./app/index.html ./dist && cp -R ./app/css/ ./dist/css && cp -R ./app/js/vendor/ ./dist/js && browserify ./app/js/index.js -o ./dist/js/index.js && node ./build.js"
+    "build": "rm -rf ./dist || true && mkdir -p ./dist/css && mkdir ./dist/js && cp ./app/index.html ./dist && cp -R ./app/css/ ./dist/css && cp -R ./app/js/vendor/ ./dist/js && cp -R ./app/images ./dist/images && browserify ./app/js/index.js -o ./dist/js/index.js && node ./build.js"
   },
   "browserify": {
     "transform": [

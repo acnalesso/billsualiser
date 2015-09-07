@@ -15,7 +15,7 @@ module.exports = function () {
     }.bind(this))
   });
 
-  this.Then(/^I should see '(.*)' in '(.*)'$/, function (str, selector, done) {
+  this.Then(/^I should see "(.*)" in "(.*)"$/, function (str, selector, done) {
     this.browser.findElement(this.By.css(selector)).getText().then(function (text) {
       this.expect(str).to.equal(text.replace(/(?:\r\n|\r|\n)/g, ' '));
       done();

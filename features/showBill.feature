@@ -8,10 +8,10 @@ Background:
   Given I am on the view bill page
 
 Scenario: Total
-  Then I should see 'Total: £136.03' in '#total'
+  Then I should see "Total: £136.03" in "#total"
 
 Scenario: Generated
-  Then I should see 'Generated: 2015-01-11' in '#generated'
+  Then I should see "Generated: January 11, 2015" in "#generated"
 
 Scenario: Due
-  Then I should see 'Payment due on 2015-01-25' in '#due'
+  Then I should see "Payment due on January 25, 2015" in "#due"

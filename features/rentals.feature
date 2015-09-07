@@ -6,7 +6,7 @@ Background:
   Given I am on the view bill page
 
 Scenario: My Rentals
-  When I click on '#rentals_title'
-  Then I should see the following call charges in '#rentals table':
+  When I click on "#rentals_title"
+  Then I should see the following call charges in "#rentals table":
     | Name                | Cost    |
     | 50 Shades of Grey   | 4.99    |

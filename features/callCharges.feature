@@ -7,8 +7,12 @@ Background:
   Given I am on the view bill page
 
 Scenario: Viewing call charges
-  When I click on '#talk_title'
-  Then I should see the following call charges in '#talk table':
+  When I click on "#talk_title"
+  Then I should see "January 26, 2015 - February 25, 2015" in "#period"
+
+Scenario: Viewing call charges
+  When I click on "#talk_title"
+  Then I should see the following call charges in "#talk table":
     | Calls       | Duration  | Cost |
     | 07716393769 | 00:23:03  | 2.13 |
     | 07716393769 | 00:23:03  | 2.13 |

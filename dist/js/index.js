@@ -89,6 +89,11 @@ var BillInfo = (function (_React$Component) {
   }
 
   _createClass(BillInfo, [{
+    key: "formatDate",
+    value: function formatDate(date) {
+      return moment(date).format('LL');
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2["default"].createElement(
@@ -116,7 +121,7 @@ var BillInfo = (function (_React$Component) {
               _react2["default"].createElement(
                 "small",
                 null,
-                this.props.data.statement.generated
+                this.formatDate(this.props.data.statement.generated)
               )
             )
           ),
@@ -128,7 +133,7 @@ var BillInfo = (function (_React$Component) {
               "div",
               { id: "due" },
               "Payment due on ",
-              this.props.data.statement.due
+              this.formatDate(this.props.data.statement.due)
             ),
             _react2["default"].createElement(
               "h4",
@@ -191,6 +196,30 @@ var DisplayCallCharges = (function (_React$Component) {
       return _react2["default"].createElement(
         "div",
         { id: this.props.id, className: "panel-collapse collapse" },
+        _react2["default"].createElement(
+          "div",
+          { className: "normalise panel-heading" },
+          _react2["default"].createElement(
+            "h3",
+            { className: "panel-title" },
+            "Sky Talk Subscription: £ ",
+            _react2["default"].createElement(
+              "span",
+              null,
+              this.props.subscriptionCost
+            )
+          ),
+          _react2["default"].createElement(
+            "h3",
+            { className: "panel-title" },
+            "Total call charges cost: ",
+            _react2["default"].createElement(
+              "span",
+              null,
+              this.props.totalCallChargesCost
+            )
+          )
+        ),
         _react2["default"].createElement(
           "table",
           { className: "table table-striped" },
@@ -407,6 +436,11 @@ var Overview = (function (_React$Component) {
       return total;
     }
   }, {
+    key: "formatDate",
+    value: function formatDate(date) {
+      return moment(date).format('LL');
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2["default"].createElement(
@@ -422,9 +456,9 @@ var Overview = (function (_React$Component) {
             _react2["default"].createElement(
               "small",
               { id: "period" },
-              this.props.data.statement.period.from,
+              this.formatDate(this.props.data.statement.period.from),
               " - ",
-              this.props.data.statement.period.to
+              this.formatDate(this.props.data.statement.period.to)
             )
           )
         ),
@@ -445,6 +479,7 @@ var Overview = (function (_React$Component) {
         _react2["default"].createElement(
           "div",
           { id: "tv", className: "panel-collapse collapse" },
+          _react2["default"].createElement("img", { src: "./images/sky-tv.jpg", className: "img" }),
           _react2["default"].createElement(
             "a",
             { href: "#more-tv-channels" },
@@ -474,6 +509,7 @@ var Overview = (function (_React$Component) {
         _react2["default"].createElement(
           "div",
           { id: "broadband", className: "panel-collapse collapse" },
+          _react2["default"].createElement("img", { src: "./images/sky-broadband.jpg", className: "img" }),
           _react2["default"].createElement(
             "a",
             { href: "#change-bb-plan" },
@@ -487,7 +523,7 @@ var Overview = (function (_React$Component) {
           )
         ),
         _react2["default"].createElement(_AnchorJsx2["default"], { id: "talk_title", target: "talk", title: this.getTalkTitle(), totalCost: this.getTalkTotalCost() }),
-        _react2["default"].createElement(_DisplayCallChargesJsx2["default"], { id: "talk", callCharges: this.props.data.callCharges.calls }),
+        _react2["default"].createElement(_DisplayCallChargesJsx2["default"], { id: "talk", subscriptionCost: this.getTotalCostFor('talk'), totalCallChargesCost: this.props.data.callCharges.total, callCharges: this.props.data.callCharges.calls }),
         _react2["default"].createElement(_AnchorJsx2["default"], { id: "rentals_title", target: "rentals", title: "Rentals", totalCost: this.addUpTotalCostsFor('rentals') }),
         _react2["default"].createElement(_DisplaySimpleTableJsx2["default"], { id: "rentals", rows: this.props.data.skyStore.rentals }),
         _react2["default"].createElement(_AnchorJsx2["default"], { id: "buy_and_keep_title", target: "buy_and_keep", title: "Buy & Keep", totalCost: this.addUpTotalCostsFor('buyAndKeep') }),
