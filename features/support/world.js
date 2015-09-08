@@ -4,16 +4,16 @@ var chai = require('chai');
 
 chai.use(chaiAsPromised);
 chai.should();
-//chaiAsPromised.transferPromiseness = wd.transferPromiseness;
-//
-var browser = new webdriver.Builder().
-  forBrowser('firefox').
-  build();
 
+
+  var driver = new webdriver.Builder().
+    usingServer("http://localhost:4444/wd/hub").
+    withCapabilities(webdriver.Capabilities.firefox()).
+    build();
 
 module.exports.World = function(callback) {
 
-  this.browser = browser;
+  this.browser = driver;
 
   this.visit = function (url) {
     var defaultUrl = "http://localhost:3000";

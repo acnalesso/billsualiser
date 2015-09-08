@@ -22,9 +22,11 @@ Allows people to see their bill ;)
 ```
 
 ## How to run the functional tests
+  NOTE: Tests run against firefox make sure you have firefox in your $path
   Assuming the app is running. Follow steps above.
 ``bash
   cd test && bundle install && ruby start_mock_server.rb && cd -
+  ./node_modules/.bin/webdriver-manager start
   ENV=env-here npm run fn
 ``
 
